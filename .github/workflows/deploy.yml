@@ -2,11 +2,19 @@ name: Deployment
 on:
   push:
     branches:
-      - main
-      - dev
+      # - main
+      # - dev
+      - section-6
+env: #can have env vars on workflow level, job level or step level.
+  MONGODB_DB_NAME: gha-demo
 jobs:
   test:
-    environment: testing
+    environment: testing #for when you setup environments on the repo. now PORT uses the testing Environments secret port value.
+    env:
+      MONGODB_CLUSTER_ADDRESS: ""
+      MONGODB_USERNAME: ""
+      MONGODB_PASSWORD: ""
+      PORT: ${{ secrets.PORT }} #to get the values of these vars from the secrets stored on the repo.
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
@@ -19,11 +27,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run server
-        run: npm start & npx wait-on http://127.0.0.1:XYZ
+        run: npm start & npx wait-on http://127.0.0.1:$PORT
       - name: Run tests
         run: npm test
       - name: Output information
-        run: echo "..."
+        run: | #cannot print this if getting secrect from repo, Actions HIDES it.
+          echo "PortValue: ${{ env.PORT }}" 
   deploy:
     needs: test
     runs-on: ubuntu-latest
