@@ -1,4 +1,4 @@
-name: Website Deployment
+name: section 7 controlling workflows
 on:
   push:
     branches:
