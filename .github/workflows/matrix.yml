@@ -2,6 +2,7 @@ name: Matrix demo
 on: push
 jobs: #matrix runs ALL combinations/configurations. so ubuntu with node 12, 14, 16 AND windows with node 12, 14, 16
   build: #matrix means u can run the same job with different configurations, eg: on different runners/node versions/any other values you wanna change at the SAME TIME.
+    continue-on-error: true
     strategy:
       matrix:
         node-version: [12, 14, 16]
