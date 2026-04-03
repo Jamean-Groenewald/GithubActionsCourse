@@ -11,7 +11,7 @@ jobs: #matrix runs ALL combinations/configurations. so ubuntu with node 12, 14, 
                  #(only for ubuntu not for windows if you were to add the 18 to the node-versions on line 8.)
                  #can also add NEW keys not above directly under the matrix tag.
           - node-version: 18
-          - operating-system: ubuntu latest
+          - operating-system: ubuntu-latest
         exclude:
           - node-version: 12
           - operating-system: windows-latest
