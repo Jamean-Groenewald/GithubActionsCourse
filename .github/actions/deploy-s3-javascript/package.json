@@ -9,10 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "@actions/core": "^3.0.0",
-    "@actions/exec": "^3.0.0",
-    "@actions/github": "^9.0.0"
+    "@actions/core": "^1.9.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^5.0.3"
   }
 }
