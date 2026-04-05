@@ -10,10 +10,13 @@ jobs:
       - name: Get code
         uses: actions/checkout@v4
       - name: Load & cache dependencies
+        id: cache-deps
         uses: ./.github/actions/cached-dependencies #JameanGRepo/my-action #like this if you made the custom action public in its own repo.
         #needs to be that path because needs to reference from root of project. not relative paths.
         with: 
           caching: 'false'
+      - name: Output information
+        run: echo "Cache used? ${{ steps.cache-deps.outputs.used-cache }}"
       - name: Lint code
         run: npm run lint
   test:
