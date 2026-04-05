@@ -2,22 +2,16 @@ name: Deployment
 on:
   push:
     branches:
-      - main
+      - section-9
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
         uses: actions/checkout@v3
-      - name: Cache dependencies
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+      - name: Load & cache dependencies
+        uses: ./.github/actions/cached-dependencies #JameanGRepo/my-action #like this if you made the custom action public in its own repo.
+        #needs to be that path because needs to reference from root of project. not relative paths.
       - name: Lint code
         run: npm run lint
   test:
