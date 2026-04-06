@@ -7,10 +7,14 @@ jobs:
   assign-label:
     runs-on: ubuntu-latest
     steps:
-      - name: Assign label
+      - name: Assign label #a";echo Got your secrets" is an example of a script injection in the issue title on github.
+                          #so actions output shows: Run issue_title="a"; echo Got your secrets""
+        env:
+          TITLE: ${{ github.event.issue.title }}
         run: |
-          issue_title="${{ github.event.issue.title }}"
-          if [[ "$issue_title" == *"bug"* ]]; then
+          # issue_title="${{ github.event.issue.title }}"
+          # if [[ "$issue_title" == *"bug"* ]]; then #now treated as a string and not a command
+          if [[ "$TITLE" == *"bug"* ]]; then
           echo "Issue is about a bug!"
           else
           echo "Issue is not about a bug"
